@@ -9,3 +9,6 @@ pkg/
 # misc
 *.log
 .DS_Store
+
+# local tooling config
+.claude/
