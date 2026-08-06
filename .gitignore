@@ -1,0 +1,11 @@
+# makepkg build artifacts
+*.deb
+*.pkg.tar.zst
+*.pkg.tar.xz
+*.tar.gz
+src/
+pkg/
+
+# misc
+*.log
+.DS_Store
