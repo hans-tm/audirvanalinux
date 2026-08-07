@@ -1,0 +1,20 @@
+# Maintainer: Hans Looman <infigoaudio@gmail.com>
+
+pkgname=infigo-airplay
+pkgver=1.0
+pkgrel=1
+pkgdesc="AirPlay 2 endpoint for Infigo streamers (shairport-sync with DAC output and audio-core pinning)"
+arch=('any')
+url="https://github.com/hans-tm/audirvanalinux"
+license=('MIT')
+depends=('shairport-sync')
+backup=('etc/infigo/shairport-sync.conf')
+source=('shairport-sync.conf' 'override.conf')
+sha256sums=('53065c5d71d9e101a95b3f365d3e06a4cdca3a342d1994f9428d59975c149ef2'
+            'a915f39e94f25256cb89df266d3ede882f038ba4ed3a6bee88ac9afb75eedb58')
+install=$pkgname.install
+
+package() {
+  install -Dm644 shairport-sync.conf "$pkgdir/etc/infigo/shairport-sync.conf"
+  install -Dm644 override.conf "$pkgdir/usr/lib/systemd/system/shairport-sync.service.d/infigo.conf"
+}

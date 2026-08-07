@@ -1,0 +1,12 @@
+post_install() {
+# AirPlay 2 timing daemon must run alongside shairport-sync
+systemctl enable --now nqptp.service >/dev/null 2>&1
+systemctl daemon-reload
+echo "
+AirPlay support installed. The 'AirPlay' tile appears on the Infigo control
+page automatically; selecting it starts shairport-sync ('Infigo Streamer')."
+}
+
+post_upgrade() {
+systemctl daemon-reload
+}

@@ -16,6 +16,7 @@ Based on the AUR package: <https://aur.archlinux.org/packages/audirvana-studio>
 | `audirvana-studio.install` | Post-install/upgrade messages |
 | `audirvanaStudio.service` | systemd user service to run Audirvana Studio headless |
 | `qbzd/` | Separate package: headless [Qobuz Connect daemon](https://github.com/vicrodh/qbz) with a system service unit (`cd qbzd && makepkg -si`) |
+| `airplay/` | Separate package: AirPlay 2 endpoint — pulls in `shairport-sync` from the Arch repos and adds the Infigo config (DAC output, device name, audio-core pinning) (`cd airplay && makepkg -si`) |
 
 ## Building and installing
 
