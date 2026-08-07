@@ -15,6 +15,7 @@ Based on the AUR package: <https://aur.archlinux.org/packages/audirvana-studio>
 | `.SRCINFO` | Generated package metadata for the AUR |
 | `audirvana-studio.install` | Post-install/upgrade messages |
 | `audirvanaStudio.service` | systemd user service to run Audirvana Studio headless |
+| `qbzd/` | Separate package: headless [Qobuz Connect daemon](https://github.com/vicrodh/qbz) with a system service unit (`cd qbzd && makepkg -si`) |
 
 ## Building and installing
 

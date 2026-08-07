@@ -1,0 +1,21 @@
+# qbzd.service — Qobuz Connect daemon (system unit for Infigo streamers)
+#
+# Runs as the 'music' user; Qobuz credentials come from a one-time
+# `qbzd login` performed as that user. Managed by the Infigo control page
+# ("Qobuz Connect" operating mode).
+[Unit]
+Description=Qobuz Connect daemon (qbzd)
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=music
+Group=audio
+ExecStart=/usr/bin/qbzd run
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

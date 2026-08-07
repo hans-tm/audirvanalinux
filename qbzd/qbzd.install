@@ -1,0 +1,15 @@
+post_install() {
+echo "
+One-time Qobuz login (as the music user):
+  qbzd login
+Then open the printed URL in a browser on the same network.
+
+The service is managed by the Infigo control page ('Qobuz Connect' mode),
+or manually with:
+  sudo systemctl enable --now qbzd"
+}
+
+post_upgrade() {
+echo "
+If Qobuz login is lost after upgrading, re-run as the music user: qbzd login"
+}

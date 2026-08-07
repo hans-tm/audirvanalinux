@@ -1,0 +1,24 @@
+# Maintainer: Hans Looman <infigoaudio@gmail.com>
+
+pkgname=qbzd
+pkgver=2.0.2
+pkgrel=1
+pkgdesc="Headless Qobuz Connect daemon (from the QBZ project)"
+arch=('x86_64')
+url="https://github.com/vicrodh/qbz"
+license=('MIT')
+depends=('glibc' 'alsa-lib' 'dbus')
+source=("https://github.com/vicrodh/qbz/releases/download/v$pkgver/qbzd-$pkgver-linux-amd64.tar.gz"
+        'qbzd.service')
+sha256sums=('6bcdb2616f339b7905fc58f48edf7e3bc2e0e9eadc1ce6235b60c7fdf34b804c'
+            '0a9277e42141d12c18a40be44a550e41802ba345058e96885ca79fc22f368726')
+install=$pkgname.install
+
+package() {
+  cd "qbzd-$pkgver-linux-amd64"
+  install -Dm755 qbzd "$pkgdir/usr/bin/qbzd"
+  # Ship our system unit (the tarball bundles a user unit only)
+  install -Dm644 "$srcdir/qbzd.service" "$pkgdir/usr/lib/systemd/system/qbzd.service"
+  install -Dm644 completions/qbzd.bash "$pkgdir/usr/share/bash-completion/completions/qbzd"
+  install -Dm644 completions/qbzd.zsh "$pkgdir/usr/share/zsh/site-functions/_qbzd"
+}
