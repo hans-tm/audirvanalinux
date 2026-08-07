@@ -2,7 +2,7 @@
 
 pkgname=qbzd
 pkgver=2.0.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Headless Qobuz Connect daemon (from the QBZ project)"
 arch=('x86_64')
 url="https://github.com/vicrodh/qbz"
@@ -11,7 +11,7 @@ depends=('glibc' 'alsa-lib' 'dbus')
 source=("https://github.com/vicrodh/qbz/releases/download/v$pkgver/qbzd-$pkgver-linux-amd64.tar.gz"
         'qbzd.service')
 sha256sums=('6bcdb2616f339b7905fc58f48edf7e3bc2e0e9eadc1ce6235b60c7fdf34b804c'
-            '0a9277e42141d12c18a40be44a550e41802ba345058e96885ca79fc22f368726')
+            '644fbb82024328723e3dc1e93960d411050797030789a74b5716ea9d0f4bf164')
 install=$pkgname.install
 
 package() {

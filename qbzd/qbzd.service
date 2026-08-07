@@ -12,7 +12,9 @@ Wants=network-online.target
 Type=simple
 User=music
 Group=audio
-ExecStart=/usr/bin/qbzd run
+# Pin to the isolated audio core (nohz_full CPU): the highest CPU number —
+# 3 on quad-core units, 7 on octa-core units. ($$ is systemd's escape for $.)
+ExecStart=/usr/bin/sh -c 'exec /usr/bin/taskset -c $$(($$(/usr/bin/getconf _NPROCESSORS_CONF) - 1)) /usr/bin/qbzd run'
 Restart=on-failure
 RestartSec=10
 NoNewPrivileges=true
