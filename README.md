@@ -55,13 +55,35 @@ systemctl --user start audirvanaStudio
 systemctl --user enable audirvanaStudio
 ```
 
+## Choosing the Audirvana version
+
+The `PKGBUILD` defaults to the current release, **3.4.0**. It can also build earlier supported versions, which is how a streamer is rolled back:
+
+```sh
+makepkg -s                              # 3.4.0-1 (default)
+AUDIRVANA_VERSION=3.3.4 makepkg -s      # 3.3.4-2, the previous fleet version
+```
+
+Then install the result with `sudo pacman -U audirvana-studio-<version>-x86_64.pkg.tar.zst`. Pacman warns that it is downgrading, which is expected for a rollback. Restart the service afterwards.
+
+The git tag `audirvana-3.3.4-2` also marks the last commit where 3.3.4 was the only version, so `git checkout audirvana-3.3.4-2 && makepkg -s` works as well.
+
+### If Audirvana stops hosting an old `.deb`
+
+The binary is downloaded from Audirvana's server at build time and is not stored in this repository. If an older `.deb` disappears from that server, copy a saved copy of it next to the `PKGBUILD` before building. `makepkg` uses a local file with the same name instead of downloading it, and still verifies its checksum:
+
+```sh
+cp /path/to/audirvana-studio_3.3.4_amd64.deb .
+AUDIRVANA_VERSION=3.3.4 makepkg -s
+```
+
 ## Updating to a new Audirvana version
 
 When Audirvana releases a new version:
 
-1. Update `pkgver` in `PKGBUILD`.
-2. Update the `sha256sums` for the new `.deb` (`updpkgsums` from `pacman-contrib` does this automatically).
-3. Regenerate `.SRCINFO`:
+1. Add the new version to the `_deb_sha256` and `_pkgrel` tables in `PKGBUILD`, with the `.deb`'s SHA-256 and pkgrel `1`. Keep the older entries so rollbacks keep working.
+2. Set `_default_ver` to the new version.
+3. Regenerate `.SRCINFO` on an Arch machine:
    ```sh
    makepkg --printsrcinfo > .SRCINFO
    ```
